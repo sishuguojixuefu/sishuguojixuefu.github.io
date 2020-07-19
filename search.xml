@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>CSS3实现转盘抽奖</title>
+    <url>/2020/01/08/CSS3%E5%AE%9E%E7%8E%B0%E8%BD%AC%E7%9B%98%E6%8A%BD%E5%A5%96/</url>
+    <content><![CDATA[<blockquote>
+<p>本文由杭州前端团队齐霁分享</p>
+</blockquote>
+<p>想实现一个转盘抽奖的需求，搜了一下现有的轮子，有的是用jQuery的动画函数实现的，有的是用canvas绘图然后再用高频率的setTimeout调用旋转方法，前者太老了没法简单移植到vue项目，后者感觉性能表现可能不会太好。也有一些用CSS动画的方案，设计了加速-匀速-减速三个动画，再计算偏转角度让三个动画尽可能无缝衔接，但我感觉绕了大远路，应该有更简单轻量的实现方案。个人更倾向于用transition来实现，不过网上的例子感觉还不够好，有的倾斜文字都没有对齐，最后还是自己手写了一个。核心思路是用transition以及rotate实现旋转动画，使用transition-origin和rotate绘制出定位较为精确的轮盘奖项，同时支持动态设置奖品数量。</p>
+<iframe id="cp_embed_XLgBQP" src="//codepen.io/mirari/embed/XLgBQP?height=600&theme-id=dark&slug-hash=XLgBQP&default-tab=js,result&embed-version=2" scrolling="no" frameborder="no" height="600" allowTransparency="true" allowfullscreen="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe>
+]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>Vue</tag>
+        <tag>CSS3</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>让IDE识别vue-cli3中webpack的别名alias</title>
+    <url>/2020/01/08/%E8%AE%A9IDE%E8%AF%86%E5%88%ABwebpack%E7%9A%84%E5%88%AB%E5%90%8Dalias/</url>
+    <content><![CDATA[<blockquote>
+<p>本文由杭州前端团队齐霁分享</p>
+</blockquote>
+<p>许多项目脚手架默认就会把src目录添加一个<code>@</code>别名，项目中实际引入时，虽然可以精简路径，但也带来一个很麻烦的问题：<br>IDE无法识别这些别名，因此导致无法自动完成路径、无法识别引用资源的输出、出现不必要的告警等情况。</p>
+<p>偶然发现vscode的web项目里有一个<code>jsconfig.json</code>文件，如：</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"compilerOptions"</span>: &#123;</span><br><span class="line">    <span class="attr">"baseUrl"</span>: <span class="string">"."</span>,</span><br><span class="line">    <span class="attr">"paths"</span>: &#123;</span><br><span class="line">      <span class="attr">"@/*"</span>: [<span class="string">"src/*"</span>]</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">"target"</span>: <span class="string">"ES6"</span>,</span><br><span class="line">    <span class="attr">"module"</span>: <span class="string">"commonjs"</span>,</span><br><span class="line">    <span class="attr">"allowSyntheticDefaultImports"</span>: <span class="literal">true</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"include"</span>: [<span class="string">"src/**/*"</span>],</span><br><span class="line">  <span class="attr">"exclude"</span>: [<span class="string">"node_modules"</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>只要有这个文件，vscode就可以正常识别出别名了。</p>
+<p>后来发现JetBrains家的IDE更简单，配置指定一下就行：</p>
+<img data-src="/2020/01/08/%E8%AE%A9IDE%E8%AF%86%E5%88%ABwebpack%E7%9A%84%E5%88%AB%E5%90%8Dalias/1.png" class="">
+
+<p>在项目设置的webpack标签页里，将配置文件指向<code>&lt;projectRoot&gt;/node_modules/@vue/cli-service/webpack.config.js</code>即可。</p>
+<p>保存并重新打开项目以后，不只<code>src</code>，所有的别名比如<code>utils</code>等等都可以被正常识别。</p>
+<p>其实这都已经写在<code>vue-cli3</code>的<a href="https://cli.vuejs.org/zh/guide/webpack.html#以一个文件的方式使用解析好的配置" target="_blank" rel="noopener">文档</a>里了，只是原始表述不太直观，被我一直忽略了。</p>
+]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>Vue</tag>
+        <tag>Webpack</tag>
+        <tag>VSCode</tag>
+        <tag>WebStorm</tag>
+        <tag>IntelliJ IDEA</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hexo博客使用说明</title>
+    <url>/4999/12/31/hello-world/</url>
+    <content><![CDATA[<p>基于Hexo搭建的技术博客平台，相较于旧平台，主要有以下特性和改进：</p>
+<ul>
+<li>使用Git项目形式管理博客，将md文件提交到服务器即可自动部署</li>
+<li>支持本地预览</li>
+<li>支持缓存阅读进度</li>
+<li>支持分页</li>
+<li>支持使用分类和标签对文章进行归类</li>
+<li>无后台的搜索功能</li>
+<li>无后台的评论系统</li>
+<li>支持引用本地图片避免外链</li>
+<li>支持引入<code>codepen</code>、<code>codesandbox</code>、<code>jsfiddle</code>等在线代码</li>
+<li>访客统计等更多丰富的插件和扩展能力</li>
+</ul>
+<h3 id="☯-最简单直接的写文章方式"><a href="#☯-最简单直接的写文章方式" class="headerlink" title="☯. 最简单直接的写文章方式"></a>☯. 最简单直接的写文章方式</h3><p>无需下载项目到本地，直接打开github项目地址：</p>
+<p><a href="https://github.com/sishuguojixuefu/blog/new/master/source/_posts" target="_blank" rel="noopener">https://github.com/sishuguojixuefu/blog/new/master/source/_posts</a></p>
+<p>创建md文件并保存，完毕。</p>
+<p>注意在md文件头部添加必要的<a href="https://hexo.io/zh-cn/docs/front-matter" target="_blank" rel="noopener"><code>front-matter</code></a>信息<br>，例如：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: Hexo博客使用说明</span><br><span class="line">date: 2020-01-08 18:53:59</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+<p>站点会在push后自动部署，等待一段时间刷新网页即可。</p>
+<h3 id="1-下载项目到本地，安装依赖"><a href="#1-下载项目到本地，安装依赖" class="headerlink" title="1. 下载项目到本地，安装依赖"></a>1. 下载项目到本地，安装依赖</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/sishuguojixuefu/blog.git blog</span><br><span class="line">yarn install</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-编写新文章"><a href="#2-编写新文章" class="headerlink" title="2. 编写新文章"></a>2. 编写新文章</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo new <span class="string">"文章标题"</span></span><br></pre></td></tr></table></figure>
+
+<p>通过命令创建文章，会自动根据<code>scaffolds</code>目录下的模板新建md文件。</p>
+<p>文件开头的<a href="https://hexo.io/zh-cn/docs/front-matter" target="_blank" rel="noopener"><code>front-matter</code></a>默认包含了一些动态生成的信息，比如文章的标题和时间。</p>
+<h3 id="3-调试和预览"><a href="#3-调试和预览" class="headerlink" title="3. 调试和预览"></a>3. 调试和预览</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>启动后访问<code>http://localhost:4000</code>即可本地预览</p>
+<h3 id="4-常用功能"><a href="#4-常用功能" class="headerlink" title="4. 常用功能"></a>4. 常用功能</h3><h4 id="分类与标签"><a href="#分类与标签" class="headerlink" title="分类与标签"></a>分类与标签</h4><p>在<a href="https://hexo.io/zh-cn/docs/front-matter" target="_blank" rel="noopener"><code>front-matter</code></a>中填写，比如</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: 这是一个标题</span><br><span class="line">date: 2020-01-08 22:52:13</span><br><span class="line">categories:</span><br><span class="line">    - [前端, 移动端]</span><br><span class="line">    - [前端, PC端]</span><br><span class="line">    - [算法]</span><br><span class="line">tags:</span><br><span class="line">    - Vue</span><br><span class="line">    - React</span><br><span class="line">    - 递归</span><br><span class="line">    - 算法</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+<p>注意分类<code>category</code>和标签<code>tag</code>的区别，后者类似关键字。</p>
+<p>详情参考：<a href="https://hexo.io/zh-cn/docs/front-matter" target="_blank" rel="noopener">https://hexo.io/zh-cn/docs/front-matter</a></p>
+<h4 id="插入本地图片"><a href="#插入本地图片" class="headerlink" title="插入本地图片"></a>插入本地图片</h4><p>在<code>source/_posts</code>目录下创建与当前文章同名的文件夹，在其中放入图片等附件。</p>
+<p>然后在md文档中插入以下代码即可显示存放在站点的本地图片。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;% asset_img 1.png %&#125;</span><br></pre></td></tr></table></figure>
+
+<p>详情参考：<a href="https://hexo.io/zh-cn/docs/asset-folders" target="_blank" rel="noopener">https://hexo.io/zh-cn/docs/asset-folders</a></p>
+<h4 id="插入codepen在线代码"><a href="#插入codepen在线代码" class="headerlink" title="插入codepen在线代码"></a>插入codepen在线代码</h4><p>参考<a href="https://github.com/bibixx/hexo-tag-codepen#usage" target="_blank" rel="noopener">https://github.com/bibixx/hexo-tag-codepen#usage</a></p>
+<h3 id="进阶使用"><a href="#进阶使用" class="headerlink" title="进阶使用"></a>进阶使用</h3><p>更多高级应用请查看<a href="https://hexo.io/zh-cn/docs/writing" target="_blank" rel="noopener">Hexo中文文档</a></p>
+]]></content>
+  </entry>
+</search>
